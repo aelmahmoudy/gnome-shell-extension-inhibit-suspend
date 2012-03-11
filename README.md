@@ -5,6 +5,10 @@ This extension is based on few already exisiting extensions with similar functio
 
 ![Screenshot](https://github.com/lavi741/gnome-shell-extension-inhibit-suspend/raw/master/Screenshot.png)
 
+## Contribute
+
+Launchpad page: https://launchpad.net/inhibit-suspend
+
 ## Licensing, etc
 
 Yet Another Inhibit Suspend Extension for GNOME shell
