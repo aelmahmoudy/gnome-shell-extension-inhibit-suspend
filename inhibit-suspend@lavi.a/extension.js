@@ -42,6 +42,7 @@ const SessionIface = {
 
 let SessionProxy = DBus.makeProxyClass(SessionIface);
 let item, userMenu;
+let inhibit, sessionProxy;
 
 function init(extensionMeta) {
     imports.gettext.bindtextdomain("gnome-shell-extension-inhibit-suspend", extensionMeta.path + "/locale");
@@ -52,8 +53,8 @@ function enable() {
     item = new PopupMenu.PopupSwitchMenuItem(_("Inhibit Suspend"), false);
     userMenu.menu.addMenuItem(item, 2);
 
-    let inhibit = undefined;
-    let sessionProxy = new SessionProxy(DBus.session, 'org.gnome.SessionManager', '/org/gnome/SessionManager');
+    inhibit = undefined;
+    sessionProxy = new SessionProxy(DBus.session, 'org.gnome.SessionManager', '/org/gnome/SessionManager');
     
     let onInhibit = function(cookie) {
         inhibit = cookie;
@@ -78,4 +79,7 @@ function disable() {
 	if (item) {
         item.destroy();
     }
+	if(inhibit) {
+    	sessionProxy.UninhibitRemote(inhibit);
+	}
 }
