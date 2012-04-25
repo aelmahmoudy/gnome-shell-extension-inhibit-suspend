@@ -51,7 +51,17 @@ function init(extensionMeta) {
 
 function enable() {
     item = new PopupMenu.PopupSwitchMenuItem(_("Inhibit Suspend"), false);
-    userMenu.menu.addMenuItem(item, 2);
+	// Look for the notifications switch instead of coding by number to prevent conflicts.
+    let statusMenu = Main.panel._statusArea.userMenu;
+    let children = statusMenu.menu._getMenuItems();
+    let index;
+	for (let i = 0; i < children.length; i++) {
+		if (children[i] == statusMenu._notificationsSwitch) {
+			index = i + 1;
+			break;
+		}
+	}
+    userMenu.menu.addMenuItem(item, index);
 
     inhibit = undefined;
     sessionProxy = new SessionProxy(DBus.session, 'org.gnome.SessionManager', '/org/gnome/SessionManager');
