@@ -46,13 +46,13 @@ let inhibit, sessionProxy;
 
 function init(extensionMeta) {
     imports.gettext.bindtextdomain("gnome-shell-extension-inhibit-suspend", extensionMeta.path + "/locale");
-    userMenu = Main.panel._statusArea.userMenu;
+    userMenu = Main.panel.statusArea.userMenu;
 }
 
 function enable() {
     item = new PopupMenu.PopupSwitchMenuItem(_("Inhibit Suspend"), false);
 	// Look for the notifications switch instead of coding by number to prevent conflicts.
-    let statusMenu = Main.panel._statusArea.userMenu;
+    let statusMenu = Main.panel.statusArea.userMenu;
     let children = statusMenu.menu._getMenuItems();
     let index;
 	for (let i = 0; i < children.length; i++) {
